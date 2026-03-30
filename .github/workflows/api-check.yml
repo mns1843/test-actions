@@ -11,7 +11,7 @@ jobs:
         run: |
           RESPONSE=$(curl -s https://actions-test.free.beeceptor.com)
           echo "Response: $RESPONSE"
-          RESULT=$(echo $RESPONSE | grep -o '"result": true')
+          RESULT=$(echo $RESPONSE | grep -o '"result": "true"')
           if [ -n "$RESULT" ]; then
             echo "Result is true - success!"
           else

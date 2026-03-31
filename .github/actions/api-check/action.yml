@@ -4,5 +4,5 @@ outputs:
   result:
     description: 'The result returned from the API'
 runs:
-  using: 'node20'
+  using: 'node24'
   main: 'index.js'

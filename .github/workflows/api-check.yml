@@ -15,7 +15,7 @@ jobs:
 
       - name: Run API check action
         id: api-check
-        uses: ./.github./actions/api-check
+        uses: .github./actions/api-check
 
       - name: Print result
         run: echo "API returned ${{ steps.api-check.outputs.resutl }}"

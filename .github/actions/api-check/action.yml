@@ -1,0 +1,8 @@
+name: 'API Check'
+description: 'Calls a mock API and returns the result'
+outputs:
+  result:
+    description: 'The result returned from the API'
+runs:
+  using: 'node20'
+  main: 'index.js'

@@ -6,24 +6,16 @@ jobs:
   call-api:
     runs-on: ubuntu-latest
     steps:
-      - name: Call mock API - true path
-        run: |
-          RESPONSE=$(curl -s https://actions-test.free.beeceptor.com)
-          echo "Response: $RESPONSE"
-          RESULT=$(echo $RESPONSE | grep -o '"result": "true"')
-          if [ -n "$RESULT" ]; then
-            echo "Result is true - success!"
-          else
-            echo "Result is false - something went wrong"
-          fi
-      - name: Call mock API - false path
-        id: api_call
-        run: |
-          RESPONSE=$(curl -s https://actions-test.free.beeceptor.com/false)
-          echo "Response: $RESPONSE"
-          RESULT=$(echo $RESPONSE | grep -o '"result": "false"')
-          if [ -n "$RESULT" ]; then
-            echo "Result is false - handled correctly"
-          else
-            echo "Unexpected result"
-          fi
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Install dependencies
+        run: npm install
+        working-directory: .github/actions/api-check
+
+      - name: Run API check action
+        id: api-check
+        uses: ./.github./actions/api-check
+
+      - name: Print result
+        run: echo "API returned ${{ steps.api-check.outputs.resutl }}"

@@ -1,0 +1,9 @@
+{
+  "name": "api-check",
+  "version": "1.0.0",
+  "description": "Calls a mock API and returns the result",
+  "main": "index.js",
+  "dependencies": {
+    "@actions/core: "^1.10.0"
+  }
+}

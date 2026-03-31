@@ -1,5 +1,5 @@
 const https = require('https');
-const core = require('@actions/core');
+const fs = require('fs');
 
 https.get('https://actions-test.free.beeceptor.com', (res) => { 
   let data = '';
@@ -10,17 +10,18 @@ https.get('https://actions-test.free.beeceptor.com', (res) => {
 
   res.on('end', () => {
     const response = JSON.parse(data);
-    console.log('Response:', response);
+    console.log('Response:', JSON.stringify(response));
 
     if (response.result = 'true') {
       console.log('Result is true - success!');
-      core.setOutput('result','true');
+      fs.appendFileSync(process.env.GITHUB_OUTPUT, 'result=true\n');
     } else {
-      console.log('Result in false - something went wrong');
-      core.setOutput('result', 'false');
-      core.setFailed('API returned false');
+      console.log('Result is false - something went wrong');
+      fs.appendFileSync(process.env.GITHUB_OUTPUT, 'result=false\n');
+      process.exit(1);
     }
   });
 }).on('error', (err) => {
-  core.setFailed('API call failed: ' + err.message);
+  console.error('API call failed: ' + err.message);
+  process.exit(1);
 });

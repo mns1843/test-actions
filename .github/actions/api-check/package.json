@@ -4,6 +4,6 @@
   "description": "Calls a mock API and returns the result",
   "main": "index.js",
   "dependencies": {
-    "@actions/core: "^1.10.0"
+    "@actions/core": "^1.10.0"
   }
 }
